@@ -1,0 +1,57 @@
+﻿@{ 
+    string name = "";
+    string email = "";
+    string nameError1 = "display: none";
+    string nameError2 = "display: none";
+    string passwordError = "display: none";
+
+    if(ViewBag.savedUser != null)
+    {
+        if(ViewBag.nameLengthValid && ViewBag.nameLettersOnly)
+        {
+            name = ViewBag.savedUser.Username;
+        }
+        else
+        {
+            if (!ViewBag.nameLengthValid)
+            {
+                nameError1 = "display: inline-block";
+            }
+            if (!ViewBag.nameLettersOnly)
+            {
+                nameError2 = "display: inline-block";
+            }
+
+        }
+
+        if(!ViewBag.passwordsMatch)
+        {
+            passwordError = "display: inline-block";
+        }
+        email = ViewBag.savedUser.Email;
+    }
+}
+
+    <form method="post">
+    
+        <label>
+            Name: <input type="text" name="username" value="@name" required />
+        </label>
+        
+        <span style="@nameError1">Name must be between 5 and 15 characters long. </span>
+        <span style="@nameError2">Name must contain only letters.</span><br />
+
+        <label>
+            Email: <input type="email" name="email" value="@email" required />
+        </label><br />
+        <label>
+            Password: <input type="password" name="password" required />
+        </label><br />
+
+        <label>
+            Verify Password: <input type="password" name="verify" required />
+        </label>
+        <span style="@passwordError">Passwords do not match.</span><br />
+
+        <input type="submit" value="Submit" />
+    </form>

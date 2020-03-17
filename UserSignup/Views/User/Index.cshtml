@@ -1,0 +1,17 @@
+﻿@*@if (ViewBag.user != null)
+{
+    <h1>Hi @ViewBag.user.Username!</h1>
+}
+else { 
+    <h1>Hi!</h1>
+}*@
+
+<h2>List of users by username</h2>
+<ul>
+    @foreach (var user in ViewBag.users)
+    {
+        <li>
+            <a asp-controller="User" asp-action="UserInfo" asp-route-id="@user.Id">@user.Username</a>
+        </li>
+    }
+</ul>
