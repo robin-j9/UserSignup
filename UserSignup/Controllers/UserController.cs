@@ -53,7 +53,9 @@ namespace UserSignup.Controllers
             else
             {
                 UserData.Add(user);
-                return View("../Home/Index");
+                ViewBag.users = UserData.GetUsers();
+                //return View("../Home/Index");
+                return View("Index");
             }
         }
 
