@@ -11,12 +11,14 @@ namespace UserSignup.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
+        public DateTime UserAdded { get; set; }
         public int Id { get; set; }
+
         public User() 
         {
             Id = nextUserId;
             nextUserId++;
+            UserAdded = DateTime.Now;
         }
         public bool NameIsCorrectLength(User user)
         {
