@@ -1,10 +1,12 @@
-﻿@if (ViewBag.user != null)
+﻿@model List<UserSignup.Models.User>
+
+@if (Model.Count != 0)
 {
-    <h1>Hi @ViewBag.user.Username!</h1>
+    <h1>Hi @Model[Model.Count - 1].Username</h1>
 
     <h3>List of users by username</h3>
     <ul>
-        @foreach (var user in ViewBag.users)
+        @foreach (var user in Model)
         {
             <li>
                 <a asp-controller="User" asp-action="UserInfo" asp-route-id="@user.Id">@user.Username</a>
@@ -14,7 +16,6 @@
 }
 else
 {
-    <h1>Hi!</h1>
+    <h1>No users</h1>
 }
-
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UserSignup.Models;
+using UserSignup.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,58 +12,35 @@ namespace UserSignup.Controllers
 {
     public class UserController : Controller
     {
-        private static User savedUser;
-        private static bool nameLengthValid = true;
-        private static bool nameLettersOnly = true;
-        private static bool passwordsMatch = true;
-
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.users = UserData.GetUsers();
-            return View();
+            List<User> users = UserData.GetUsers();
+            return View(users);
         }
 
         public IActionResult Add()
         {
-            ViewBag.passwordsMatch = passwordsMatch;
-            ViewBag.nameLengthValid = nameLengthValid;
-            ViewBag.nameLettersOnly = nameLettersOnly;
-
-            if(savedUser != null)
-            {
-                ViewBag.savedUser = savedUser;
-            }
-            return View();
+            AddUserViewModel addUserViewModel = new AddUserViewModel();
+            return View(addUserViewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(User user, string verify)
+        public IActionResult Add(AddUserViewModel addUserViewModel)
         {
-            ViewBag.user = user;
-            savedUser = user;
-
-            nameLettersOnly = user.NameContainsOnlyLetters(user);
-            nameLengthValid = user.NameIsCorrectLength(user);
-            passwordsMatch = verify == user.Password;
-
-            if (!nameLettersOnly || !nameLengthValid || !passwordsMatch)
+            if (ModelState.IsValid)
             {
-                return Redirect("Add");
+                UserData.Add(addUserViewModel.CreateUser());
+                return Redirect("/User");
             }
-            else
-            {
-                UserData.Add(user);
-                ViewBag.users = UserData.GetUsers();
-                //return View("../Home/Index");
-                return View("Index");
-            }
+            return View(addUserViewModel);
         }
 
         public IActionResult UserInfo(int id)
         {
-            ViewBag.user = UserData.GetUserById(id);
-            return View();
+            DisplayUserViewModel displayUserViewModel = new DisplayUserViewModel(id);
+            
+            return View(displayUserViewModel);
         }
     }
 }

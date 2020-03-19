@@ -1,3 +1,16 @@
-﻿<p>Name: @ViewBag.user.Username</p>
-<p>Email: @ViewBag.user.Email</p>
-<p>Date Joined: @ViewBag.user.UserAdded</p>
+﻿@model UserSignup.ViewModels.DisplayUserViewModel
+
+<table>
+    <tr>
+        <th>Name</th>
+        <td>@Model.Username</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Date Added</th>
+        <td>@Model.UserAdded</td>
+    </tr>
+</table>

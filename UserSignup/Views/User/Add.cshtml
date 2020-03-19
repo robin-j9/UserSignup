@@ -1,57 +1,29 @@
-﻿@{ 
-    string name = "";
-    string email = "";
-    string nameError1 = "display: none";
-    string nameError2 = "display: none";
-    string passwordError = "display: none";
-
-    if(ViewBag.savedUser != null)
-    {
-        if(ViewBag.nameLengthValid && ViewBag.nameLettersOnly)
-        {
-            name = ViewBag.savedUser.Username;
-        }
-        else
-        {
-            if (!ViewBag.nameLengthValid)
-            {
-                nameError1 = "display: inline-block";
-            }
-            if (!ViewBag.nameLettersOnly)
-            {
-                nameError2 = "display: inline-block";
-            }
-
-        }
-
-        if(!ViewBag.passwordsMatch)
-        {
-            passwordError = "display: inline-block";
-        }
-        email = ViewBag.savedUser.Email;
-    }
-}
+﻿@model UserSignup.ViewModels.AddUserViewModel
 
     <form method="post">
-    
-        <label>
-            Name: <input type="text" name="username" value="@name" required />
-        </label>
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input class="form-control" asp-for="Username" />
+            <span asp-validation-for="Username"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input class="form-control" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="VerifyPassword"></label>
+            <input class="form-control" asp-for="VerifyPassword" />
+            <span asp-validation-for="VerifyPassword"></span>
+        </div>
         
-        <span style="@nameError1">Name must be between 5 and 15 characters long. </span>
-        <span style="@nameError2">Name must contain only letters.</span><br />
-
-        <label>
-            Email: <input type="email" name="email" value="@email" required />
-        </label><br />
-        <label>
-            Password: <input type="password" name="password" required />
-        </label><br />
-
-        <label>
-            Verify Password: <input type="password" name="verify" required />
-        </label>
-        <span style="@passwordError">Passwords do not match.</span><br />
-
-        <input type="submit" value="Submit" />
+        <input class="btn btn-primary" type="submit" value="Submit" />
     </form>

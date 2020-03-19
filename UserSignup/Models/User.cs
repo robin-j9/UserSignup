@@ -20,14 +20,14 @@ namespace UserSignup.Models
             nextUserId++;
             UserAdded = DateTime.Now;
         }
-        public bool NameIsCorrectLength(User user)
-        {
-            return user.Username.Length > 4 && user.Username.Length < 16;
-        }
+        //public bool NameIsCorrectLength(User user)
+        //{
+        //    return user.Username.Length > 4 && user.Username.Length < 16;
+        //}
 
-        public bool NameContainsOnlyLetters(User user)
-        {
-            return user.Username.All(Char.IsLetter);
-        }
+        //public bool NameContainsOnlyLetters(User user)
+        //{
+        //    return user.Username.All(Char.IsLetter);
+        //}
     }
 }
