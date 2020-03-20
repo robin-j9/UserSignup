@@ -9,7 +9,6 @@ namespace UserSignup.Models
     {
         private static List<User> users = new List<User>();
 
-        //Add
         public static void Add(User user)
         {
             users.Add(user);
@@ -26,17 +25,5 @@ namespace UserSignup.Models
         {
             return users.Single(x => x.Id == id);
         }
-
-        //public static bool NameIsCorrectLength(string name)
-        //{
-        //    if (name.Length > 4 && name.Length < 16)
-        //        return true;
-        //    else return false;
-        //}
-
-        //public static bool NameContainsOnlyLetters(string name)
-        //{
-        //    return name.All(Char.IsLetter);
-        //}
     }
 }
